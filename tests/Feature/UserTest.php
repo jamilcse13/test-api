@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\User;
 
 class UserTest extends TestCase
 {
@@ -19,7 +20,7 @@ class UserTest extends TestCase
 
         /**
          * @test
-         * 
+         *
          * @return Pass if our testing condition is right otherwise it returns failed
          * we can use withoutExceptionHandling() to check our expected error
          */
@@ -27,5 +28,29 @@ class UserTest extends TestCase
             'name' => 'jamil',
             'email' => 'demo@laravel.com'
         ]);
+    }
+
+    public function testUserCreate()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->json('post', '/users', [
+            'name' => 'John Doe',
+            'email' => 'john@laravel.com',
+            'password' => '123456'
+        ]);
+
+        $response->assertStatus(200);
+    }
+
+    public function testValidatedata()
+    {
+        $validationResponse = $this->json('post', '/users', [
+            'name' => 'John Doe',
+            'email' => 'john@laravel.com',
+            'password' => ''
+        ]);
+
+        $validationResponse->assertStatus(422);
     }
 }
