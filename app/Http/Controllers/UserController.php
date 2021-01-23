@@ -7,6 +7,10 @@ use App\User;
 
 class UserController extends Controller
 {
+    public function show()
+    {
+        return "Hello";
+    }
     public function create(Request $request)
     {
         $validatedData = $request->validate([

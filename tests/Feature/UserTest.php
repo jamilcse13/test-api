@@ -25,11 +25,20 @@ class UserTest extends TestCase
          * we can use withoutExceptionHandling() to check our expected error
          */
         $this->assertDatabaseHas('users', [
-            'name' => 'jamil',
-            'email' => 'demo@laravel.com'
+            'name' => 'John Doe',
+            'email' => 'john@laravel.com'
         ]);
     }
 
+    function testUserRouteConnection()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->get('/users');
+
+        $response->assertStatus(200);
+    }
+    
     public function testUserCreate()
     {
         $this->withoutExceptionHandling();
@@ -40,7 +49,7 @@ class UserTest extends TestCase
             'password' => '123456'
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function testValidatedata()
