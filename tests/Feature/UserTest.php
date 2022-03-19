@@ -38,21 +38,21 @@ class UserTest extends TestCase
 
         $response->assertStatus(200);
     }
-    
+
     public function testUserCreate()
     {
         $this->withoutExceptionHandling();
 
         $response = $this->json('post', '/users', [
-            'name' => 'John Doe',
-            'email' => 'john@laravel.com',
+            'name' => 'Mr. Malcom',
+            'email' => 'malcom@laravel.com',
             'password' => '123456'
         ]);
 
         $response->assertOk();
     }
 
-    public function testValidatedata()
+    public function testValidateData()
     {
         $validationResponse = $this->json('post', '/users', [
             'name' => 'John Doe',
