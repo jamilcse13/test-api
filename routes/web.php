@@ -19,3 +19,6 @@ Route::get('/', function () {
 
 Route::get('/users', 'UserController@show');
 Route::post('/users', 'UserController@create');
+
+Route::get('/dynamic-items', 'DynamicItemsController@index');
+Route::put('/dynamic-items', 'DynamicItemsController@update');
